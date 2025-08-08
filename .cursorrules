@@ -1,0 +1,54 @@
+# Cursor project rules: TypeScript + React + Vite + Electron
+
+## TypeScript
+- Enable strict typing; avoid `any`. Prefer precise types and utility types over broad unions.
+- Prefer named exports over default exports.
+- Use descriptive names: functions as verbs, variables as nouns; avoid abbreviations.
+- Keep functions small and focused; use early returns to reduce nesting.
+- Organize by feature when practical (`/src/features/<name>`), with colocated types and tests.
+- React renderer code should use `import.meta.env` (not `process.env`). Use `process.env` only in the Electron main process.
+
+## React
+- Functional components with hooks; no legacy class components.
+- Keep components pure; side-effects in `useEffect`.
+- Derive state minimally; compute values from props/state instead of duplicating.
+- CSS: prefer local styles or CSS Modules; avoid global leakage.
+
+## Vite
+- Dev: use HMR via `pnpm dev`.
+- Prod build: `pnpm build` → emits `dist/` for renderer and `electron-dist/` for main/preload.
+- Use `import.meta.env.VITE_*` for renderer config; never expose secrets to the client.
+
+## Electron (security & structure)
+- Separate processes:
+  - Main process: `electron/main.ts`
+  - Preload: `electron/preload.ts`
+  - Renderer: React in `src/`
+- Security defaults:
+  - `contextIsolation: true`
+  - `nodeIntegration: false`
+  - Use preload + `contextBridge` to expose a minimal, typed API to the renderer.
+  - Avoid `eval` and remote module; set `sandbox: true` for renderer where possible.
+- IPC
+  - Define IPC channels centrally; use string literal unions or `enum` for channel names.
+  - Validate all IPC inputs in the main process; never trust renderer input.
+
+## Code quality
+- Lint before commit: `pnpm lint`.
+- Formatting: match project style; keep lines reasonably short and code multi-line over complex one-liners.
+- Tests (when added): colocate near code; prefer small, focused tests.
+
+## Project hygiene
+- Do not commit generated artifacts: `node_modules/`, `dist/`, `electron-dist/`, caches, logs, crash dumps, installer outputs.
+- Environment: manage via `.env` (not committed). Renderer only uses `VITE_*`-prefixed vars.
+- Conventional commits (e.g., `feat`, `fix`, `chore`, `refactor`, `docs`).
+
+## Developer workflow
+- Install: `pnpm install`
+- Dev: `pnpm dev` (Vite + Electron)
+- Build: `pnpm build`
+- Lint: `pnpm lint`
+
+## Future improvements (optional)
+- Add typed preload API using `contextBridge.exposeInMainWorld` and shared `types`.
+- Introduce a task runner (`Makefile` or `justfile`) for common tasks if desired.

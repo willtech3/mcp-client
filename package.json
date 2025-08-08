@@ -3,12 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "electron-dist/main.js",
   "scripts": {
     "dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron .\"",
     "build": "tsc -b && vite build && tsc -p tsconfig.electron.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": ">=22.17.1"
+  },
+  "packageManager": "pnpm@10.14.0",
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
