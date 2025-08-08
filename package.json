@@ -9,8 +9,9 @@
     "build": "tsc -b && vite build && tsc -p tsconfig.electron.json",
     "lint": "eslint .",
     "preview": "vite preview",
-    "clean": "echo 'Cleaning build artifacts and caches...' && rm -rf dist electron-dist .vite .cache .parcel-cache logs && find . -name '*.log*' -type f -delete && rm -rf node_modules/.tmp node_modules/.vite && find . -type d \( -name Crashpad -o -name crashpad_database -o -name crashpad \) -prune -exec rm -rf {} +",
-    "clean:deep": "pnpm clean && rm -rf node_modules"
+    "clean": "echo 'Cleaning build artifacts and caches (keeping logs)...' && rm -rf dist electron-dist .vite .cache .parcel-cache && rm -rf node_modules/.tmp node_modules/.vite",
+    "clean:logs": "echo 'Cleaning logs and crash reports...' && rm -rf logs && find . -name '*.log*' -type f -delete && find . -type d \\( -name Crashpad -o -name crashpad_database -o -name crashpad \\) -prune -exec rm -rf {} +",
+    "clean:deep": "pnpm clean && pnpm clean:logs && rm -rf node_modules"
   },
   "engines": {
     "node": ">=22.17.1"
