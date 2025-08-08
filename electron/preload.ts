@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { IPC_CHANNELS, LogLevel, RendererLogEvent } from './shared/ipc'
+import { IPC_CHANNELS, LogLevel, RendererLogEvent } from './shared/ipc.js'
 
 type RendererLogger = {
   send: (level: LogLevel, message: string, details?: unknown) => void

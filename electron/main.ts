@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 import pino from 'pino'
-import { createDailyRotatingNdjsonStream, ensureLogsDir } from './logging'
-import { IPC_CHANNELS, isLogEvent } from './shared/ipc'
+import { createDailyRotatingNdjsonStream, ensureLogsDir } from './logging.js'
+import { IPC_CHANNELS, isLogEvent } from './shared/ipc.js'
 
 let mainWindow: BrowserWindow | null = null
 
