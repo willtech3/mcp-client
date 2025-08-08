@@ -1,0 +1,77 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Electron / OS specific
+out/
+build/
+release/
+electron-dist/
+*.asar
+*.asar.unpacked
+*.map
+*.dmg
+*.exe
+*.msi
+*.deb
+*.rpm
+*.AppImage
+
+# Electron Builder / Forge caches
+.cache/
+.electron/
+.vite/
+/.parcel-cache
+
+# Crash reports
+**/Crashpad/**
+**/crashpad_database/**
+**/crashpad/**
+
+# Logs & diagnostics
+**/logs/**
+**/*.log*
+*.pid
+*.seed
+*.pid.lock
+
+# Env & secrets
+.env
+.env.*
+.env.local
+.env.*.local
+
+# Packaging artifacts
+*.snap
+*.pkg
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
