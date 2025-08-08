@@ -4,9 +4,10 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default tseslint.config([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'electron-dist']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -20,4 +21,11 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
+  {
+    files: ['electron/**/*.ts', 'vite.config.ts'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  eslintConfigPrettier,
 ])
